@@ -108,6 +108,7 @@ void merge_set(int a, int b) {
 int32_t main(){
 	speed
 	cin >> n >> E >> Q;
+    vector<pi>adjlist[500000];
 	memset(answers,5,sizeof answers);
 	for(int i = 0;i<E;i++){
 		int a,b,c;cin>>a>>b>>c;
@@ -120,12 +121,15 @@ int32_t main(){
 		int a = edge.s.f;int b = edge.s.s;
 		if(!same_set(a,b)){
 			merge_set(a,b);
+            adjlist[a].push_back(pi(b,c));
+            adjlist[a].push_back(pi(a,c));
 		}
 	}
 	answers[1] = 0;
+    //dfs here, storing answer for each node in answers array
 	for(int i = 0;i<Q;i++){
 		int x;cin>>x;
-		//dfs here
+		//output answer(access from answers array)
 	}
 }
 
