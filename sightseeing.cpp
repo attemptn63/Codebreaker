@@ -93,6 +93,8 @@ using namespace std;
 vector<pii>edgelist;
 int p[1000010];
 int answers[500000];
+vector<pi>adjlist[500000];
+bool visited[500000];
 int n,E,Q;
 int find_set(int x){
 	if (p[x] == x) return x;  
@@ -105,11 +107,20 @@ bool same_set(int a, int b) {
 void merge_set(int a, int b) {  
 	p[find_set(a)] = find_set(b);
 }
+void dfs(int x){
+    visited[x] = true;
+    for(auto i:adjlist[x]){
+        if(!visited[i.f]){
+            answers[i.f] = min(answers[x],i.s);
+            dfs(i.f);
+        }
+    }
+}
 int32_t main(){
 	speed
 	cin >> n >> E >> Q;
-    vector<pi>adjlist[500000];
-	memset(answers,5,sizeof answers);
+    memset(answers,5,sizeof answers);
+    memset(visited,false,sizeof visited);
 	for(int i = 0;i<E;i++){
 		int a,b,c;cin>>a>>b>>c;
 		edgelist.push_back(pii(c,pi(a,b)));
@@ -122,15 +133,15 @@ int32_t main(){
 		if(!same_set(a,b)){
 			merge_set(a,b);
             adjlist[a].push_back(pi(b,c));
-            adjlist[a].push_back(pi(a,c));
+            adjlist[b].push_back(pi(a,c));
 		}
 	}
-	answers[1] = 0;
-    //dfs here, storing answer for each node in answers array
+    adjlist[0].push_back(pi(1,1000000));
+    dfs(0);
 	for(int i = 0;i<Q;i++){
 		int x;cin>>x;
-		//output answer(access from answers array)
-	}
+        cout<<answers[x]<<"\n";
+    }
 }
 
 /*
