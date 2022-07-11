@@ -92,9 +92,9 @@ using namespace std;
 #define s second
 vector<pii>edgelist;
 int p[1000010];
-int answers[500000];
-vector<pi>adjlist[500000];
-bool visited[500000];
+int answers[500005];
+vector<pi>adjlist[500005];
+bool visited[500005];
 int n,E,Q;
 int find_set(int x){
 	if (p[x] == x) return x;  
