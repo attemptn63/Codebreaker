@@ -95,9 +95,9 @@ vector<int>adjlist[100005];
 void precomp(){
     for (int k=1;k<20;k++) {
         for (int i=0;i<n;i++) {
-            if (p[i][k-1] != -1) {
+            if (p[i ][k-1] != -1) {
                 p[i][k] = p[p[i][k-1]][k-1];
-            } else p[i][k] = -1; \
+            } else p[i][k] = -1;
         }
     }
 }
@@ -120,6 +120,7 @@ int32_t main(){
         adjlist[b].push_back(a);
     }
     dfs(0,-1);
+    p[0][0] = -1;
     precomp();
     int q;cin>>q;
     for(int i = 0;i<q;i++){
@@ -128,19 +129,20 @@ int32_t main(){
         cout<<kth_parent(x,k)<<"\n";
     }
 }
-//10
-//0 1
-//1 2
-//2 3
-//3 4
-//4 5
-//6 0
-//7 2
-//2 8
-//3 9
-//5
-//5 3
-//5 5
-//7 2
-//6 2
-//8 2
+/*10
+0 1
+1 2
+2 3
+3 4
+4 5
+6 0
+7 2
+2 8
+3 9
+5
+5 3
+5 5
+7 2
+6 2
+8 2
+*/
