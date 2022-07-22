@@ -96,8 +96,8 @@ void precomp(){
     for (int k=1;k<20;k++) {
         for (int i=0;i<n;i++) {
             if (p[i][k-1] != -1) {
-                p[i][k] = p[p[i][k-1]][k-1]; // 2^k parent is the 2^(k-1)th parent’s 2^(k-1)th parent
-            } else p[i][k] = -1; // no 2^k-th parent
+                p[i][k] = p[p[i][k-1]][k-1];
+            } else p[i][k] = -1; \
         }
     }
 }
@@ -110,7 +110,7 @@ int kth_parent(int x, int k){
 }
 void dfs(int node,int parent){
     p[node][0] = parent;
-    for (int i : adjlist[node]){if(i == parent)continue;dfs(i,node);}
+    for (auto i : adjlist[node]){if(i == parent)continue;dfs(i,node);}
 }
 int32_t main(){
     cin>>n;
