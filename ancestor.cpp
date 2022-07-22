@@ -90,6 +90,40 @@ using namespace std;
 #define pii pair<int,pi>
 #define f first
 #define s second
-signed main(){
-  
+int p[100005][20],n,ctr=0;
+vector<int>adjlist[100005];
+void precomp(){
+    for (int k=1;k<20;k++) {
+        for (int i=0;i<n;i++) {
+            if (p[i][k-1] != -1) {
+                p[i][k] = p[p[i][k-1]][k-1]; // 2^k parent is the 2^(k-1)th parent’s 2^(k-1)th parent
+            } else p[i][k] = -1; // no 2^k-th parent
+        }
+    }
+}
+int kth_parent(int x, int k){
+    for (int i = 0; i <= 20; i++){
+        if (k & (1 << i)) x = twok[x][i];
+        if (x <= -1) return -1;
+    }
+    return x;
+}
+void dfs(int node,int parent){
+    for (int i : adjlist[node]){if(i == parent)continue;p[i][0]=node;dfs(i,node);}
+}
+int32_t main(){
+    cin>>n;
+    for(int i = 0;i<n;i++){
+        int a,b;cin>>a>>b;
+        adjlist[a].push_back(b);
+        adjlist[b].push_back(a);
+    }
+    dfs(0,-1);
+    precomp();
+    int q;cin>>q;
+    for(int i = 0;i<q;i++){
+        int x,k;
+        cin>>x>>k;
+        cout<<kth_parent(x,k)<<"\n";
+    }
 }
