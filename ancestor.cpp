@@ -103,7 +103,7 @@ void precomp(){
 }
 int kth_parent(int x, int k){
     for (int i = 0; i <= 20; i++){
-        if (k & (1 << i)) x = twok[x][i];
+        if (k & (1 << i)) x = p[x][i];
         if (x <= -1) return -1;
     }
     return x;
