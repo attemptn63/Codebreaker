@@ -95,7 +95,7 @@ vector<int>adjlist[100005];
 void precomp(){
     for (int k=1;k<20;k++) {
         for (int i=0;i<n;i++) {
-            if (p[i ][k-1] != -1) {
+            if (p[i][k-1] != -1) {
                 p[i][k] = p[p[i][k-1]][k-1];
             } else p[i][k] = -1;
         }
